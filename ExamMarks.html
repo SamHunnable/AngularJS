@@ -1,0 +1,33 @@
+<html ng-app="First">
+
+<script src="angular.js"> </script>
+
+<script>
+  var M = angular.module("First",[]);
+  M.controller("MyCtrl", function($scope) {
+    var Rec = {
+      regno:12,
+      name:"Sam",
+      marks:100
+    }
+    $scope.Record = Rec;
+  });
+</script>
+
+<div ng-controller="MyCtrl">
+Name: {{Record.name}} <br>
+Mark: {{Record.marks}} <br>
+Update marks :<input ng-model="Record.marks"> <br>
+Percentage: {{Record.marks*100/150}} <br>
+<br>
+
+<B ng-if = "Record.marks>90">
+  Pass
+</B>
+
+<B ng-if = "Record.marks<90">
+  Fail
+</B>
+</div>
+
+</html>

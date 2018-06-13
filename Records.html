@@ -1,0 +1,63 @@
+<html ng-app="First">
+
+<script src="angular.js"> </script>
+
+<script>
+  var M = angular.module("First",[]);
+  M.controller("MyCtrl", function($scope) {
+    var Rec = [
+      {regno:1,name:"Sam",marks:95},
+      {regno:2,name:"Adam",marks:50},
+      {regno:3,name:"Bob",marks:120}
+    ]
+    $scope.Record = Rec;
+  });
+</script>
+
+<div ng-controller="MyCtrl">
+
+
+
+
+<table border="1">
+
+  <tr>
+    <td> Reg Number </td>
+    <td> Name </td>
+    <td> Marks </td>
+    <td> Percentage </td>
+    <td> Result </td>
+  </tr>
+
+  <tr ng-repeat="D in Record">
+    <B>
+    <td> {{D.regno}} </td>
+    <td> {{D.name}} </td>
+    <td> {{D.marks}} </td>
+    <td> {{D.marks*100/150}} </td>
+    <td> <B ng-if = "D.marks>90">
+          <font color="green"> Pass </font>
+        </B>
+      <B ng-if = "D.marks<90">
+        <font color="red"> Fail </font>
+      </B>
+    </td>
+
+    </B>
+  </tr>
+
+
+
+</table>
+
+
+<B ng-if = "Record.marks>90">
+  Pass
+</B>
+
+<B ng-if = "Record.marks<90">
+  Fail
+</B>
+</div>
+
+</html>

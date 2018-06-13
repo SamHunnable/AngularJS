@@ -1,0 +1,16 @@
+<html ng-app="First">
+<script src="angular.js"> </script>
+<script>
+	var M = angular.module("First",[]);
+	M.controller("MyCtrl", function($scope) {
+		$scope.name = "Sam"
+		$scope.marks = "10";
+	});
+</script>
+
+<div ng-controller="MyCtrl">
+Name: {{ name }} <br>
+Marks: {{ marks }} <br>
+</div>
+
+</html>

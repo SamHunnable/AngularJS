@@ -1,0 +1,72 @@
+<html ng-app="First">
+
+<script src="angular.js">
+</script>
+
+<script>
+  var data = function($scope) {
+    var Rec = [{
+        regno: 1,
+        name: "A",
+        address: "abc"
+      },
+      {
+        regno: 2,
+        name: "B",
+        address: "xyz"
+      }
+    ];
+
+    $scope.Record = Rec;
+
+    var tempdata = function($scope) {
+      var TempRec = [{
+        regno:"",
+        name:"",
+        address:""
+      }]
+    }
+
+  $scope.add = function() {
+    $scope.data.push(tempdata);
+  }
+  };
+
+  var M = angular.module("First", []);
+  M.controller("MyCtrl", data);
+
+</script>
+
+<div ng-controller="MyCtrl">
+
+  <table border="1">
+
+    <tr>
+      <td> Regno </td>
+      <td> Name </td>
+      <td> Address </td>
+      <td> Edit </td>
+
+    </tr>
+
+    <tr ng-repeat="D in Record">
+      <td> {{D.regno}} </td>
+      <td> {{D.name}} </td>
+      <td> {{D.address}} </td>
+      <td> <input type="checkbox" ng-model=""> </td>
+
+    </tr>
+
+  </table>
+
+<br>
+Regno <input > <br>
+Name <input > <br>
+Address <input > <br>
+<input type="button" value="add" onclick="add()">
+
+
+
+</div>
+
+</html>

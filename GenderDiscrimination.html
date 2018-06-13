@@ -1,0 +1,115 @@
+<html ng-app="First">
+
+<script src="angular.js">
+</script>
+
+<script>
+  var data = function($scope) {
+    var Rec = [{
+        name: "A",
+        age: 20,
+        gender: "M",
+        salary: 5000
+      },
+      {
+        name: "B",
+        age: 25,
+        gender: "M",
+        salary: 15000
+      },
+      {
+        name: "C",
+        age: 30,
+        gender: "M",
+        salary: 25000
+      },
+      {
+        name: "D",
+        age: 35,
+        gender: "M",
+        salary: 35000
+      },
+      {
+        name: "E",
+        age: 20,
+        gender: "F",
+        salary: 5000
+      },
+      {
+        name: "F",
+        age: 25,
+        gender: "F",
+        salary: 15000
+      },
+      {
+        name: "G",
+        age: 30,
+        gender: "F",
+        salary: 25000
+      },
+      {
+        name: "H",
+        age: 35,
+        gender: "F",
+        salary: 35000
+      }
+    ];
+    $scope.Record = Rec;
+  };
+
+  var M = angular.module("First", []);
+  M.controller("MyCtrl", data);
+
+  M.filter("tax", function() {
+    var f = function(salary, gender, age) {
+
+      if (age > 30 && gender == "M") {
+        if (salary < 20000) {
+          return 15;
+        } else if (salary < 30000) {
+          return 19;
+        } else if (salary < 40000) {
+          return 21;
+        }
+      }
+      if (age >= 30 && gender == "F") {
+        return (573 / salary) * 100;
+      } else {
+        return 0;
+      }
+    };
+    return f;
+  });
+</script>
+
+<div ng-controller="MyCtrl">
+  <table border="1">
+    <tr>
+      <td> Name </td>
+      <td> Age </td>
+      <td> Gender </td>
+      <td> Salary </td>
+      <td> Tax </td>
+      <td> Net Salary </td>
+      <td> Annual Salary </td>
+      <td> Annual Salary with tax </td>
+
+    </tr>
+
+    <tr ng-repeat="D in Record">
+      <td> {{D.name}} </td>
+      <td> {{D.age}} </td>
+      <td> {{D.gender}} </td>
+      <td> £{{D.salary}} </td>
+      <td> {{D.salary | tax:D.gender:D.age |number:2}}% </td>
+      <td> £{{(1-(D.salary | tax:D.gender:D.age)/100)*D.salary}} </td>
+      <td> £{{D.salary*12}} </td>
+      <td> £{{(1-(D.salary | tax:D.gender:D.age)/100)*D.salary*12}} </td>
+
+
+    </tr>
+
+  </table>
+</div>
+
+</html>

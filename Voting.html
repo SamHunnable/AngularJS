@@ -1,0 +1,74 @@
+<html ng-app="First">
+
+<script src="angular.js">
+</script>
+
+<script>
+  var data = function($scope) {
+    var Rec = [{
+        language: "Java",
+        likes: 0,
+        dislikes: 0
+      },
+      {
+        language: "C#",
+        likes: 0,
+        dislikes: 0
+      }
+    ];
+    $scope.Record = Rec;
+
+    $scope.like = function(line) {
+      line.likes++;
+    }
+
+    $scope.dislike = function(line) {
+      line.dislikes++;
+    }
+  };
+
+  var M = angular.module("First", []);
+  M.controller("MyCtrl", data);
+
+  M.filter("result", function() {
+        var f = function(line) {
+          if (line.likes == line.dislikes) {
+            return "***";
+          }
+          if (line.likes > line.dislikes) {
+            return "More Likes";
+          }
+          if (line.likes < line.dislikes) {
+            return "More Dislikes";
+          }
+
+        };
+        return f;
+      });
+
+</script>
+<div ng-controller="MyCtrl">
+  <table border="1">
+    <tr>
+      <td> Language</td>
+      <td> Likes</td>
+      <td> Dislikes</td>
+      <td> Result</td>
+    </tr>
+
+    <tr ng-repeat="D in Record">
+      <td> {{D.language}} </td>
+      <td> {{D.likes}} </td>
+      <td> {{D.dislikes}} </td>
+      <td> {{D | result}} </td>
+      <td>
+        <Input type="button" value="Likes" ng-click="like(D)">
+        <Input type="button" value="Dislikes" ng-click="dislike(D)">
+      </td>
+
+    </tr>
+
+  </table>
+</div>
+
+</html>

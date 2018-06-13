@@ -1,0 +1,111 @@
+<html ng-app="First">
+
+<script src="angular.js">
+</script>
+
+<script>
+  var data = function($scope) {
+    var Rec = [{
+        name: "A",
+        age: 20,
+        salary: 5000
+      },
+      {
+        name: "B",
+        age: 25,
+        salary: 15000
+      },
+      {
+        name: "C",
+        age: 30,
+        salary: 25000
+      },
+      {
+        name: "D",
+        age: 35,
+        salary: 35000
+      }
+    ];
+    $scope.Record = Rec;
+  };
+
+
+  var M = angular.module("First", []);
+  M.controller("MyCtrl", data);
+
+
+  M.filter("tax", function() {
+    var f = function(salary) {
+      if (salary < 20000) {
+        return 15;
+      } else if (salary < 30000) {
+        return 19;
+      } else if (salary < 40000) {
+        return 21;
+      }
+    };
+    return f;
+  });
+</script>
+
+<div ng-controller="MyCtrl">
+Mask Names <input type="checkbox" ng-model="MaskName">
+Hide Names <input type="checkbox" ng-model="HideName"> </br>
+
+Mask Ages<input type="checkbox" ng-model="MaskAge">
+Hide Ages <input type="checkbox" ng-model="HideAge"> </br>
+
+Mask Salaries<input type="checkbox" ng-model="MaskSalary">
+Hide Salaries <input type="checkbox" ng-model="HideSalary"> </br>
+
+Mask Tax<input type="checkbox" ng-model="MaskTax">
+Hide Tax<input type="checkbox" ng-model="HideTax"> </br>
+
+Mask Net Salaries<input type="checkbox" ng-model="MaskNetSalary">
+Hide Net Salaries <input type="checkbox" ng-model="HideNetSalary"> </br>
+
+Mask Annual Salary<input type="checkbox" ng-model="MaskAnnualSalary">
+Hide Annual Salary <input type="checkbox" ng-model="HideAnnualSalary"> </br>
+
+Mask Annual Salary with Tax<input type="checkbox" ng-model="MaskTaxAnnualSalary">
+Hide Annual Salary with Tax <input type="checkbox" ng-model="HideTaxAnnualSalary"> </br>
+
+  <table border="1">
+
+    <tr>
+      <td ng-hide="HideName"> Name </td>
+      <td ng-hide="HideAge"> Age </td>
+      <td ng-hide="HideSalary"> Salary </td>
+      <td ng-hide="HideTax"> Tax </td>
+      <td ng-hide="HideNetSalary"> Net Salary </td>
+      <td ng-hide="HideAnnualSalary"> Annual Salary </td>
+      <td ng-hide="HideTaxAnnualSalary"> Annual Salary with tax </td>
+    </tr>
+
+    <tr ng-repeat="D in Record">
+      <td ng-hide="MaskName || HideName"> {{D.name}} </td>
+      <td ng-hide="!MaskName || HideName"> *** </td>
+
+      <td ng-hide="MaskAge || HideAge"> {{D.age}} </td>
+      <td ng-hide="!MaskAge || HideAge"> *** </td>
+
+      <td ng-hide="MaskSalary || HideSalary"> £{{D.salary}} </td>
+      <td ng-hide="!MaskSalary || HideSalary"> *** </td>
+
+      <td ng-hide="MaskTax || HideTax"> {{D.salary | tax}}% </td>
+      <td ng-hide="!MaskTax || HideTax"> *** </td>
+
+      <td ng-hide="MaskNetSalary || HideNetSalary"> £{{(1-(D.salary | tax)/100)*D.salary}} </td>
+      <td ng-hide="!MaskNetSalary || HideNetSalary"> *** </td>
+
+      <td ng-hide="MaskAnnualSalary || HideAnnualSalary"> £{{D.salary*12}} </td>
+      <td ng-hide="!MaskAnnualSalary || HideAnnualSalary"> *** </td>
+
+      <td ng-hide="MaskTaxAnnualSalary || HideTaxAnnualSalary"> £{{(1-(D.salary | tax)/100)*D.salary*12}} </td>
+      <td ng-hide="!MaskTaxAnnualSalary || HideTaxAnnualSalary"> *** </td>
+    </tr>
+
+  </table>
+</div>
+
+</html>

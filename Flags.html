@@ -1,0 +1,41 @@
+<html ng-app="First">
+
+<script src="angular.js"> </script>
+
+<script>
+  var M = angular.module("First",[]);
+  M.controller("MyCtrl", function($scope) {
+    var Rec = [
+      {name:"Sam",country:"UK"},
+      {name:"A",country:"USA"},
+      {name:"B",country:"Spain"},
+      {name:"C",country:"France"},
+      {name:"D",country:"Nepal"}
+    ];
+    $scope.Record = Rec;
+  });
+</script>
+
+<div ng-controller="MyCtrl">
+<table border="1">
+  <tr>
+    <td> Name </td>
+    <td> Country </td>
+    <td>Flag </td>
+
+  </tr>
+
+  <tr ng-repeat="D in Record">
+    <td> {{D.name}} </td>
+    <td> {{D.country}},{{D.country}} </td>
+
+    <td ng-switch="D.country">
+        <img ng-switch-when="UK" src="UK.PNG"></img>
+        <img ng-switch-when="USA" src="USA.PNG"> </img>
+        <img ng-switch-when="Spain" src="Spain.PNG"/> </img>
+    </td>
+  </tr>
+
+</table>
+</div>
+</html>
